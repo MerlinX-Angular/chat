@@ -1,0 +1,35 @@
+<div class='post' fxLayout='row' fxLayoutAlign='none stretch'>
+  <!-- nuotrauką ima iš firebase-->
+  <img *ngIf='post.postImage; else noPhotoTemplate' [src]='post.postImage' alt='Google profile photo'>
+  <ng-template #noPhotoTemplate>
+    <img src='/assets/images/missing_photo.png' alt='Misssing photo'>
+  </ng-template>
+    <div fxFlex fxLayout='column'>
+      <div class='author-name' flFlex>{{post.postName}}</div>
+      <div *ngIf='editingMode!=2' class='post-body' flFlex>{{post.body}}</div>      
+        <mat-input-container [class.hide]='editingMode!=2'dividerColor='accent'>
+          <input #updateInputEl matInput type='text' placeholder='Edit your post'
+                 (keyup.enter)='save()'
+                 [(ngModel)]='updatedPostBody' name='updatedPostBody'>
+        </mat-input-container>          
+    </div>
+     <!-- nustatome būseną editingMode==1 -->
+    <div *ngIf='editingMode==1' fxLayout='row'>
+      <button mat-icon-button (click)='editPost(updateInputEl)'>
+          <mat-icon>edit</mat-icon>
+      </button>
+      <button mat-icon-button (click)='deletePost()'>
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+     <!-- nustatome būseną editingMode==2 -->
+    <div *ngIf='editingMode==2' fxLayout='row'>
+       <!-- atjungiame save ikoną-->
+      <button [disabled]='updatedPostBody==post.body' mat-icon-button (click)='save()'>
+          <mat-icon>save</mat-icon>
+      </button>
+      <button mat-icon-button (click)='cancel()'>
+        <mat-icon>cancel</mat-icon>
+      </button>
+    </div>
+</div>

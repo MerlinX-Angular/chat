@@ -1,0 +1,13 @@
+<mat-card fxLayout='row'>
+  <!--  <img *ngIf='authService.photoUrl as photoUrl; else noPhotoTemplate' [src]='photoUrl' -->
+  <img *ngIf='authService.photoUrl; else noPhotoTemplate' [src]='authService.photoUrl' alt='Google profile photo'>
+  <ng-template #noPhotoTemplate>
+    <img src='/assets/images/missing_photo.png' alt='Misssing photo'>
+  </ng-template>
+  <form fxFlex fxLayout (ngSubmit)='onSubmit()'>
+    <mat-input-container fxFlex dividerColor='warn'>
+      <input matInput type='text' placeholder='Make a post' required
+             [(ngModel)]='postText' name='postText'>
+    </mat-input-container>
+  </form>
+</mat-card>

@@ -1,0 +1,14 @@
+<mat-card fxLayout='column' fxLayoutAlign='none stretch'>
+  <div *ngFor='let post of postService.postsStream | async | reverse'>
+    <app-post [post]='post'></app-post>
+    <!-- kiekvienas post atskira eilute -->
+    <hr>
+  </div>
+  <div *ngIf='!postService.result && this.postService.quantity > 5'
+              fxLayout='row' fxLayoutAlign='end center'>
+      <button mat-raised-button color='primary' (click)='postService.displayMorePosts()'>
+      Load more posts
+    </button>
+  </div>
+</mat-card>
+

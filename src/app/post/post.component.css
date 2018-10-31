@@ -1,0 +1,10 @@
+img {
+  height: 60px;
+  margin-right: 10px;
+}
+.author-name {
+  font-weight: bold;
+}
+.hide {
+  display: none;
+}
